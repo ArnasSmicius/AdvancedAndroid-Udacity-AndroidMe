@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.android.android_me.R;
+import com.example.android.android_me.data.AndroidImageAssets;
 
 // This activity will display a custom Android image composed of three body parts: head, body, and legs
 public class AndroidMeActivity extends AppCompatActivity {
@@ -34,7 +35,9 @@ public class AndroidMeActivity extends AppCompatActivity {
         // Create a new head BodyPartFragment
         BodyPartFragment headFragment = new BodyPartFragment();
 
-        // TODO (4) Set the list of image id's for the head fragment and set the position to the second image in the list
+        // COMPLETED (4) Set the list of image id's for the head fragment and set the position to the second image in the list
+        headFragment.setImageResource(AndroidImageAssets.getHeads());
+        headFragment.setImageIndex(2);
 
         // Add the fragment to its container using a FragmentManager and a Transaction
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -43,7 +46,20 @@ public class AndroidMeActivity extends AppCompatActivity {
                 .add(R.id.head_container, headFragment)
                 .commit();
 
-        // TODO (5) Create and display the body and leg BodyPartFragments
+        // COMPLETED (5) Create and display the body and leg BodyPartFragments
+        // Creating body fragment
+        BodyPartFragment bodyFragment = new BodyPartFragment();
+        bodyFragment.setImageResource(AndroidImageAssets.getBodies());
+        bodyFragment.setImageIndex(2);
+
+        //Creating leg fragment
+        BodyPartFragment legFragment = new BodyPartFragment();
+        legFragment.setImageResource(AndroidImageAssets.getLegs());
+        legFragment.setImageIndex(2);
+
+        // Inflating body and legs fragments into layout with FragmentManager
+        fragmentManager.beginTransaction().add(R.id.body_container, bodyFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.leg_container, legFragment).commit();
 
     }
 }
